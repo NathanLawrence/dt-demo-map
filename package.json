@@ -1,0 +1,14 @@
+{
+  "name": "dt-demo-map",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "author": "nathan@nathanlawrence.org",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "datamaps": "^0.4.4"
+  }
+}
