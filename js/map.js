@@ -6,12 +6,17 @@ var arcData = [{
 {
 	origin: 'TX',
     destination: 'MO',
-    amount: '400'
+    amount: '1000'
 },
 {
 	origin: 'MA',
     destination: 'MO',
     amount: '6000'
+},
+{
+	origin: 'IL',
+    destination: 'MO',
+    amount: '2000'
 }];
 
 
@@ -20,7 +25,8 @@ var arcScale = d3.scale.linear()
 		d3.min(arcData, function(d) { return +d.amount;} ),
 		d3.max(arcData, function(d) { return +d.amount;} )
 		])
-	.range([1,15]);
+	.range([1,10])
+	.clamp(true);
 
 
 
@@ -28,7 +34,7 @@ var map = new Datamap({
   element: document.getElementById("container"),
   scope: 'usa',
   fills: {
-    defaultFill: "#CCCCCC", //changed from #ABDDA4
+    defaultFill: "#AAAAAA", //changed from #ABDDA4
     win: '#0fa0fa'
   },
   data: {
@@ -43,10 +49,18 @@ var map = new Datamap({
 
 
 //Arc Loop Test
+var arcs = [];
 arcData.forEach(makeArc);
+map.arc(arcs);
 
 function makeArc(item, index){
 	console.log(item);
+
+	arcs.push({
+		origin: item.origin,
+		destination: item.destination,
+		strokeWidth: arcScale(item.amount)
+	});
 
 }
 
@@ -54,11 +68,11 @@ function makeArc(item, index){
 // Arcs coordinates can be specified explicitly with latitude/longtitude,
 // or just the geographic center of the state/country.
 
-map.arc([
+/*map.arc([
   {
     origin: 'CA',
     destination: 'TX',
-    strokeWidth: '15px'
+    strokeWidth: '15'
   },
   {
     origin: 'OR',
@@ -103,4 +117,4 @@ map.arc([
           longitude: -78.7875
       }
   }
-],  {strokeWidth: 1, arcSharpness: 1.4});
+],  {strokeWidth: 1, arcSharpness: 1.4});*/
