@@ -1,10 +1,26 @@
 var arcData = [{
 	origin: 'CA',
-    destination: 'TX',
-    
-}
+    destination: 'MO',
+    amount: '10000'
+},
+{
+	origin: 'TX',
+    destination: 'MO',
+    amount: '400'
+},
+{
+	origin: 'MA',
+    destination: 'MO',
+    amount: '6000'
+}];
 
-]
+
+var arcScale = d3.scale.linear()
+	.domain([
+		d3.min(arcData, function(d) { return +d.amount;} ),
+		d3.max(arcData, function(d) { return +d.amount;} )
+		])
+	.range([1,15]);
 
 
 
@@ -26,8 +42,18 @@ var map = new Datamap({
 });
 
 
+//Arc Loop Test
+arcData.forEach(makeArc);
+
+function makeArc(item, index){
+	console.log(item);
+
+}
+
+
 // Arcs coordinates can be specified explicitly with latitude/longtitude,
 // or just the geographic center of the state/country.
+
 map.arc([
   {
     origin: 'CA',
